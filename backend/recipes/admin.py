@@ -5,12 +5,10 @@ from .models import (Ingredient, Recipe, Tag, Favorite,
 
 class IngredientInLine(admin.TabularInline):
     model = RecipeIngredient
-    extra = 1
 
 
 class TagInLine(admin.TabularInline):
     model = TagRecipe
-    extra = 1
 
 
 @admin.register(Ingredient)
