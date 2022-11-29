@@ -112,7 +112,7 @@ class FollowerSerializer(serializers.ModelSerializer):
 
 
 class FollowUsersSerializer(ModelSerializer):
-    """отображение подписок."""
+    """отображает подписки."""
     class Meta:
         model = Followers
         fields = ('user', 'author')
