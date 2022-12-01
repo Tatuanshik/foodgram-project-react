@@ -79,19 +79,19 @@ class Recipe(models.Model):
     )
     tags = models.ManyToManyField(
         Tag,
-        through='TagRecipe',
         verbose_name='Тэг',
-        related_name='recipes',
-        help_text='Выберите тэг'
+        help_text='Выберите тэг',
+        related_name='recipe'
     )
     pub_date = models.DateTimeField(
         verbose_name='Дата публикации',
         auto_now=True
     )
-    cooking_time = models.IntegerField(
-        verbose_name='Время приготовления в минутах',
+    cooking_time = models.PositiveSmallIntegerField(
+        verbose_name='Время приготовления блюда: мин',
         validators=[
-            MinValueValidator(1), MaxValueValidator(1000)
+            MaxValueValidator(1000, 'Время приготовления блада не может быть больше 1000'),
+            MinValueValidator(1, 'Время приготовления блада не может быть меньше 1 мин')
         ]
     )
 
@@ -115,11 +115,11 @@ class RecipeIngredient(models.Model):
         on_delete=models.CASCADE,
         verbose_name='Ингредиент'
     )
-    amount = models.IntegerField(
+    amount = models.PositiveSmallIntegerField(
+        verbose_name='Количество',
         validators=[
-            MinValueValidator(1), MaxValueValidator(1000)
-        ],
-        verbose_name='Количество'
+            MaxValueValidator(1000, 'Количество не более 1000!'),
+            MinValueValidator(1, 'Количество не менее 1!')]
     )
 
     class Meta:
