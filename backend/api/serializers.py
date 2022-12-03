@@ -311,26 +311,22 @@ class RecipeCreateSerializer(serializers.ModelSerializer):
         ingredients = data["ingredients"]
         ingredients_list = []
         for ingredient in ingredients:
+            if not ingredients:
+                raise serializers.ValidationError(
+                    'Нужен минимум 1 ингредиент в рецепте!')
+            if int(ingredient.get('amount')) < 1:
+                raise serializers.ValidationError(
+                    'Количество ингредиента должно быть больше 0!')
+            if int(ingredient.get('amount')) > 1000:
+                raise serializers.ValidationError(
+                    'Количество ингредиента не должно быть больше 1000!'
+                )
             ingredient_id = ingredient['id']
             if ingredient_id in ingredients_list:
                 raise serializers.ValidationError(
                     'Ингредиент должен быть уникальным!'
                 )
             ingredients_list.append(ingredient_id)
-        if not ingredients:
-            raise serializers.ValidationError(
-                'Нужен минимум 1 ингредиент в рецепте!')
-        for ingredient in ingredients:
-            if int(ingredient.get('amount')) < 1:
-                raise serializers.ValidationError(
-                    'Количество ингредиента должно быть больше 0!')
-            if int(ingredient.get('amount')) > 32767:
-                raise serializers.ValidationError(
-                    'Количество ингредиента не должно быть больше 32767!'
-                )
-            if not int(ingredient.get('amount')):
-                raise serializers.ValidationError(
-                    'Можно ввести только число!')
         return data
         
     def validate_tags(self, tags):
@@ -338,13 +334,12 @@ class RecipeCreateSerializer(serializers.ModelSerializer):
         if not tags:
             raise serializers.ValidationError(
                 'Нужно выбрать хотя бы один тег!')
+        tags_list = []
         for tag in tags:
             if tag not in Tag.objects.all():
                 raise serializers.ValidationError(
                     'Тег не найден!'
                 )
-        tags_list = []
-        for tag in tags:
             if tag in tags_list:
                 raise serializers.ValidationError(
                     'Теги должны быть уникальными!'
@@ -353,7 +348,7 @@ class RecipeCreateSerializer(serializers.ModelSerializer):
         return tags
 
     def create_ingredients(self, ingredients, recipe):
-        list = []
+        ingredients_list = []
         for ingredient in ingredients:
             ingredient_id = get_object_or_404(
                 Ingredient,
@@ -364,8 +359,8 @@ class RecipeCreateSerializer(serializers.ModelSerializer):
                 amount=ingredient.get('amount'),
                 ingredient=ingredient_id
             )
-            list.append(item)
-        RecipeIngredient.objects.bulk_create(list)
+            ingredients_list.append(item)
+        RecipeIngredient.objects.bulk_create(ingredients_list)
 
     def validate_cooking_time(self, cooking_time):
         """валидация времени приготовления."""
@@ -398,11 +393,8 @@ class RecipeCreateSerializer(serializers.ModelSerializer):
         self.create_ingredients(ingredients, instance)
         tags = validated_data.pop('tags')
         instance.tags.set(tags)
-        instance.name = validated_data.pop('name')
-        instance.text = validated_data.pop('text')
         if validated_data.get('image'):
             instance.image = validated_data.pop('image')
-        instance.cooking_time = validated_data.pop('cooking_time')
         instance.save()
         return super().update(instance, validated_data)
 
