@@ -1,20 +1,31 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
+from django.core.validators import RegexValidator
 from rest_framework.exceptions import ValidationError
 
 
 class User(AbstractUser):
+    ADMIN = 'admin'
+    USER = 'user'
+    ROLES = [
+        (ADMIN, 'Administrator'),
+        (USER, 'User'),
+    ]
     email = models.EmailField(
         verbose_name='Электронная почта',
-        unique=True, max_length=60
+        unique=True, 
+        max_length=60
     )
     username = models.CharField(
         verbose_name='Логин',
-        max_length=30
-    )
-    password = models.CharField(
-        verbose_name='Пароль',
-        max_length=50
+        max_length=30,
+        null=False,
+        unique=True,
+        validators=[RegexValidator(
+            regex=r'^[\w.@+-]+$',
+            message='В имени пользователя недопустимые символы'
+        )]
+
     )
     first_name = models.CharField(
         verbose_name='Имя',
@@ -24,6 +35,11 @@ class User(AbstractUser):
         verbose_name='Фамилия',
         max_length=50
     )
+    role = models.CharField(
+        max_length=50,
+        choices=ROLES,
+        default=USER,
+        verbose_name='Роль')
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['username', 'first_name', 'last_name', 'password']
@@ -49,12 +65,14 @@ class Followers(models.Model):
         on_delete=models.CASCADE,
         related_name='follower',
         verbose_name='Подписчик',
+        null=True,
     )
     author = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
         related_name='following',
         verbose_name='Автор',
+        null=True,
     )
 
     class Meta:

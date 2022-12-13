@@ -50,7 +50,7 @@ class TagViewSet(viewsets.ModelViewSet):
     queryset = Tag.objects.all()
     permission_classes = (AllowAny,)
     serializer_class = TagSerializer
-    pagination_class = None
+
 
 
 class UserViewSet(viewsets.ModelViewSet):
