@@ -210,10 +210,11 @@ class FavoriteSerializer(serializers.ModelSerializer):
                 fields=('user', 'recipe'),
             )
         ]
-    
+
     def get_fav(self, request):
         return Favorite.objects.filter(
-           user=request.user, recipe__id=id).exists()
+           user=request.user, recipe__id=id
+        ).exists()
 
     def to_representation(self, instance):
         return UserFavoriteSerializer(instance.recipe, context={
@@ -230,7 +231,7 @@ class ShoppingListSerializer(serializers.ModelSerializer):
     def get_is_list(self, request):
         return ShoppingList.objects.filter(
             user=request.user, recipe=request.recipe
-            ).exists()
+        ).exists()
 
     def to_representation(self, instance):
         return UserFavoriteSerializer(instance.recipe, context={
@@ -292,7 +293,7 @@ class RecipeCreateSerializer(serializers.ModelSerializer):
     tags = serializers.PrimaryKeyRelatedField(queryset=Tag.objects.all(),
                                               many=True)
     author = UsersSerializer(read_only=True)
-    image = Base64ImageField(max_length=None, use_url=True)
+    image = Base64ImageField()
 
     class Meta:
         model = Recipe
@@ -402,4 +403,3 @@ class RecipeCreateSerializer(serializers.ModelSerializer):
         return RecipeSerializer(instance, context={
             'request': self.context.get('request')
         }).data
-

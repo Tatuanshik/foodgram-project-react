@@ -13,7 +13,7 @@ from rest_framework.response import Response
 from recipes.models import (Ingredient, RecipeIngredient, Recipe,
                             ShoppingList, Tag, Favorite)
 from users.models import Followers
-from .filters import RecipeFilter, IngredientSearchFilter
+from .filters import RecipeFilter, IngredientFilter
 from .paginations import CustomPagination
 from .permissions import IsAdminOrAuthorOrReadOnly
 from .serializers import (TagSerializer, IngredientSerializer, UsersSerializer,
@@ -29,8 +29,9 @@ class IngredientViewSet(viewsets.ModelViewSet):
     queryset = Ingredient.objects.all()
     permission_classes = (AllowAny,)
     serializer_class = IngredientSerializer
-    filter_backend = [DjangoFilterBackend, IngredientSearchFilter]
-    search_fields = ('^name', 'name')
+    filter_backend = [DjangoFilterBackend, ]
+    filterset_class = IngredientFilter
+    http_method_names = ('get',)
 
 
 class RecipeViewSet(viewsets.ModelViewSet):
@@ -50,7 +51,6 @@ class TagViewSet(viewsets.ModelViewSet):
     queryset = Tag.objects.all()
     permission_classes = (AllowAny,)
     serializer_class = TagSerializer
-
 
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -113,8 +113,8 @@ class FavoriteViewSet(APIView):
             'recipe': id
         }
         serializer = FavoriteSerializer(
-                data=data, context={'request': request}
-            )
+            data=data, context={'request': request}
+        )
         serializer.is_valid(raise_exception=True)
         serializer.save()
         return Response(
@@ -137,7 +137,7 @@ class ShoppingListView(APIView):
         }
         serializer = ShoppingListSerializer(
             data=data, context={'request': request}
-            )
+        )
         serializer.is_valid(raise_exception=True)
         serializer.save()
         return Response(
@@ -147,7 +147,7 @@ class ShoppingListView(APIView):
         recipe = get_object_or_404(Recipe, id=id)
         if ShoppingList.objects.filter(
                 user=request.user, recipe=recipe
-            ).delete():
+        ).delete():
             return Response(status=status.HTTP_204_NO_CONTENT)
         return Response(status=status.HTTP_400_BAD_REQUEST)
 

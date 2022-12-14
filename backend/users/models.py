@@ -13,7 +13,7 @@ class User(AbstractUser):
     ]
     email = models.EmailField(
         verbose_name='Электронная почта',
-        unique=True, 
+        unique=True,
         max_length=60
     )
     username = models.CharField(

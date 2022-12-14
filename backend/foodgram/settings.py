@@ -1,6 +1,5 @@
 import os
 from dotenv import load_dotenv
-from pathlib import Path
 
 load_dotenv()
 
@@ -17,7 +16,6 @@ ALLOWED_HOSTS = ['*']
 
 
 INSTALLED_APPS = [
-    'jet',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -128,6 +126,10 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.TokenAuthentication',
     ),
 }
+
+EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
+
+EMAIL_FILE_PATH = os.path.join(BASE_DIR, 'sent_emails')
 
 DJOSER = {
     'SERIALIZERS': {

@@ -8,7 +8,7 @@ User = get_user_model()
 class Ingredient(models.Model):
     name = models.CharField(
         verbose_name='Название ингридиента',
-        max_length=50
+        max_length=100
     )
     measurement_unit = models.CharField(
         verbose_name='Единица измерения',
@@ -74,7 +74,7 @@ class Recipe(models.Model):
         related_name='recipe'
     )
     image = models.ImageField(
-        upload_to='recipes/images/',
+        upload_to='',
         verbose_name='Изображение блюда'
     )
     tags = models.ManyToManyField(
