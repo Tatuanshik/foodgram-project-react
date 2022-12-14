@@ -329,7 +329,7 @@ class RecipeCreateSerializer(serializers.ModelSerializer):
                 )
             ingredients_list.append(ingredient_id)
         return data
-        
+
     def validate_tags(self, tags):
         """валидация тегов."""
         if not tags:
