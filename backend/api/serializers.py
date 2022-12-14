@@ -213,7 +213,7 @@ class FavoriteSerializer(serializers.ModelSerializer):
 
     def get_fav(self, request):
         return Favorite.objects.filter(
-           user=request.user, recipe__id=id
+            user=request.user, recipe__id=id
         ).exists()
 
     def to_representation(self, instance):
