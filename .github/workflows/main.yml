@@ -71,7 +71,6 @@ jobs:
             sudo docker-compose stop
             sudo docker image rm tanyshka/web:latest-amd64
             sudo docker pull tanyshka/web:latest-amd64
-            rm .env
             touch .env
             echo DJANGO_SECRET_KEY=${{ secrets.DJANGO_SECRET_KEY }} >> .env
             echo DOCKER_USERNAME=${{ secrets.DOCKER_USERNAME }} >> .env
