@@ -68,6 +68,7 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           passphrase: ${{ secrets.PASSPHRASE }}
           script: |
+            cd foodgram/
             sudo docker-compose stop
             sudo docker image rm tanyshka/web:latest-amd64
             sudo docker pull tanyshka/web:latest-amd64
