@@ -17,17 +17,17 @@
 
 ## Установить зависимости из файла requirements.txt:
 - ***```python3 -m pip install --upgrade pip```***
-- ```***pip install -r backend/foodgram/requirements.txt***```
+- ***```pip install -r backend/foodgram/requirements.txt```***
 
 ## Из директории infra/:Запустить проект в контейнере
-#### docker-compose up -d --build
+- ***```docker-compose up -d --build```***
 
 ## Выполняем миграции:
-#### sudo docker-compose exec web python manage.py migrate
+- ***``` sudo docker-compose exec web python manage.py migrate```***
 ## Загрузить ингредиенты: 
-#### sudo docker-compose exec web python manage.py load_ingredients
+- ***``` sudo docker-compose exec web python manage.py load_ingredients```***
 ## Создаем суперпользователя:
-#### sudo docker-compose exec web python manage.py createsuperuser
+- ***``` sudo docker-compose exec web python manage.py createsuperuser```***
 
 ### Остановка контейнера:
-### sudo docker-compose down -v
+- ***```sudo docker-compose down -v```***
