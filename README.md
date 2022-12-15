@@ -8,8 +8,8 @@
 
 # Запускаем проект:
 
-### Клонировать репозитарий:git@github.com:Tatuanshik/foodgram-project-react.git
-### cd backend
+##### Клонировать репозитарий:git@github.com:Tatuanshik/foodgram-project-react.git
+#### cd backend
 
 ## Создать виртуальное окружение
 ### python -m venv env или python3 -m venv env (Mac)
