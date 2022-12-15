@@ -8,26 +8,26 @@
 
 # Запускаем проект:
 
-##### Клонировать репозитарий:git@github.com:Tatuanshik/foodgram-project-react.git
-#### cd backend
+#### Клонировать репозитарий:git@github.com:Tatuanshik/foodgram-project-react.git
+##### cd backend
 
 ## Создать виртуальное окружение
-### python -m venv env или python3 -m venv env (Mac)
-### source env/Scripts/activate или source venv/bin/activate (Mac)
+#### python -m venv env или python3 -m venv env (Mac)
+#### source env/Scripts/activate или source venv/bin/activate (Mac)
 
 ## Установить зависимости из файла requirements.txt:
-### python3 -m pip install --upgrade pip
-### pip install -r backend/foodgram/requirements.txt
+#### python3 -m pip install --upgrade pip
+#### pip install -r backend/foodgram/requirements.txt
 
 ## Из директории infra/:Запустить проект в контейнере
-### docker-compose up -d --build
+#### docker-compose up -d --build
 
 ## Выполняем миграции:
-### sudo docker-compose exec web python manage.py migrate
+#### sudo docker-compose exec web python manage.py migrate
 ## Загрузить ингредиенты: 
-### sudo docker-compose exec web python manage.py load_ingredients
+#### sudo docker-compose exec web python manage.py load_ingredients
 ## Создаем суперпользователя:
-### sudo docker-compose exec web python manage.py createsuperuser
+#### sudo docker-compose exec web python manage.py createsuperuser
 
 ### Остановка контейнера:
-## sudo docker-compose down -v
+### sudo docker-compose down -v
