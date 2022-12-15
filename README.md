@@ -8,7 +8,7 @@
 
 # Запускаем проект:
 
-#### Клонировать репозитарий:git@github.com:Tatuanshik/foodgram-project-react.git
+*** Клонировать репозитарий:git@github.com:Tatuanshik/foodgram-project-react.git ***
 ##### cd backend
 
 ## Создать виртуальное окружение
