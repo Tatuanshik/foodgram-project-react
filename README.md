@@ -16,8 +16,8 @@
 - ``` source env/Scripts/activate или source venv/bin/activate (Mac) ```
 
 ## Установить зависимости из файла requirements.txt:
-- ***python3 -m pip install --upgrade pip***
-- ***pip install -r backend/foodgram/requirements.txt***
+- ```***python3 -m pip install --upgrade pip***```
+- ```***pip install -r backend/foodgram/requirements.txt***```
 
 ## Из директории infra/:Запустить проект в контейнере
 #### docker-compose up -d --build
