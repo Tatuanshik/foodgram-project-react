@@ -68,7 +68,13 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           passphrase: ${{ secrets.PASSPHRASE }}
           script: |
-            cd foodgram/
+            cd foodgram
+            sudo docker-compose stop
+            sudo docker pull tanyshka/web:latest-amd64
+            sudo docker pull tanyshka/front:latest-amd64
+            sudo docker-compose up -d --build
+            sudo docker-compose up
+            
             touch .env
             echo DOCKER_USERNAME=${{ secrets.DOCKER_USERNAME }} >> .env
             echo DB_ENGINE=${{ secrets.DB_ENGINE }} >> .env
@@ -78,12 +84,7 @@ jobs:
             echo DB_HOST=${{ secrets.DB_HOST }} >> .env
             echo DB_PORT=${{ secrets.DB_PORT }} >> .env
              
-            
-            sudo docker-compose stop
-            sudo docker pull tanyshka/web:latest-amd64
-            sudo docker pull tanyshka/front:latest-amd64
-            sudo docker-compose up -d --build
-            sudo docker-compose up
+      
             
   send_message:
     runs-on: ubuntu-latest
