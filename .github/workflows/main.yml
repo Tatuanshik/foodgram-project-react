@@ -73,7 +73,6 @@ jobs:
             sudo docker pull tanyshka/web:latest-amd64
             sudo docker pull tanyshka/front:latest-amd64
             sudo docker-compose up -d --build
-            sudo docker-compose up
             
             touch .env
             echo DOCKER_USERNAME=${{ secrets.DOCKER_USERNAME }} >> .env
