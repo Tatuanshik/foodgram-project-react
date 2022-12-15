@@ -11,9 +11,9 @@
 ***Клонировать репозитарий:git@github.com:Tatuanshik/foodgram-project-react.git***
 - cd backend
 
-## Создать виртуальное окружение
-#### python -m venv env или python3 -m venv env (Mac)
-#### source env/Scripts/activate или source venv/bin/activate (Mac)
+***Создать виртуальное окружение***
+- ```python -m venv env или python3 -m venv env (Mac)```
+- ``` source env/Scripts/activate или source venv/bin/activate (Mac) ```
 
 ## Установить зависимости из файла requirements.txt:
 #### python3 -m pip install --upgrade pip
