@@ -1,4 +1,4 @@
-[![CI и CD проекта foodgram-project-react](https://github.com/Tatuanshik/foodgram-project-react/actions/workflows/main.yml/badge.svg?branch=master)](https://github.com/Tatuanshik/oodgram-project-react/actions/workflows/main.yml//)
+[![CI и CD проекта foodgram-project-react](https://github.com/Tatuanshik/foodgram-project-react/actions/workflows/main.yml/badge.svg?branch=master)](https://github.com/Tatuanshik/foodgram-project-react/actions/workflows/main.yml//)
 
 Страница сайта доступна по адресу: http://84.201.166.178/
 
