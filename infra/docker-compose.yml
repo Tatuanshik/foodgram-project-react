@@ -11,10 +11,6 @@ services:
   web:
     image: tanyshka/web:latest-amd64
     restart: always
-    command: >
-      bash -c "python3 manage.py migrate &&
-      python3 manage.py collectstatic --noinput &&
-      gunicorn --bind 0:8000 foodgram.wsgi"
     volumes:
       - static_value:/app/static/
       - media_value:/app/media/
